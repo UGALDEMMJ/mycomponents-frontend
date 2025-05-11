@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import "tailwindcss";
 
-@theme{
+@theme {
 
     --color-night: #121212;
     --color-secondary: #FFFFFF;
@@ -9,4 +10,6 @@
     --color-ppl: #4B0082;
     --color-office: #006400;
     --color-silver: #B0B0B0;
+
+    --font-space-mono: "Space Mono", monospace;
 }
