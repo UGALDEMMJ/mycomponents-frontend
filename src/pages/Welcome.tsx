@@ -24,13 +24,13 @@ const texts: Texts[] = [
     text: "Store, preview, and organize reusable UI components with ease.",
   },
   {
-    text: "Discover components by category, check out the most viewed ones.",
+    text: "Discover components by categories, check out the most viewed ones.",
   },
   {
     text: "With MyComponents.",
     link: "/dashboard",
     colors: {
-      text:  "animate-pulse text-blue-600 transition-colors duration-300 ease-in-out hover:text-purple-600",
+      text:  "animate-pulse text-blue-600 transition-colors duration-300 ease-in-out hover:text-purple-600 hover:border-b",
     },
   },
 ];
