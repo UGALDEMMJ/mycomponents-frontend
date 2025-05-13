@@ -30,14 +30,15 @@ const texts: Texts[] = [
     text: "With MyComponents.",
     link: "/dashboard",
     colors: {
-      text:  "animate-pulse text-blue-600 transition-colors duration-300 ease-in-out hover:text-purple-600 hover:border-b",
+      text:
+        "animate-pulse text-cyan-600 transition-colors duration-300 ease-in-out hover:text-cyan-400 hover:border-b",
     },
   },
 ];
 
 // Valores por defecto para colores
 const defaultColors = {
-  text: "text-white", 
+  text: "text-white",
 };
 
 const Welcome: React.FC = () => {
@@ -181,11 +182,16 @@ const Welcome: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full h-screen overflow-hidden bg-black font-space-mono"
     >
       <header className="fixed top-0 left-0 w-full z-50 p-4 bg-black/80 text-white flex justify-between">
-        <a href="https://github.com/UGALDEMMJ" className="font-bold">Developed by UGALDEMMJ</a>
-        <div className="text-sm opacity-80">Scroll to navigate</div>
+      <p>Developed by <a
+          href="https://github.com/UGALDEMMJ"
+          className="font-bold hover:text-cyan-500">
+         UGALDEMMJ
+        </a></p>
+        <div className="text-sm opacity-80 animate-pulse transition-colors duration-300">Scroll to navigate</div>
+        <a href="/dashboard" className="text-sm opacity-80 hover:text-cyan-500 font-bold">MyComponents</a>
       </header>
 
       {texts.map((item, index) => {
