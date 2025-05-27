@@ -191,7 +191,7 @@ const Welcome: React.FC = () => {
     >
       <header className="fixed top-0 left-0 w-full z-50 p-4 bg-black/80 text-white flex justify-between">
       <p>Developed by <a
-          href="https://github.com/UGALDEMMJ"
+          href="www.linkedin.com/in/mugaldem"
           className="font-bold hover:text-cyan-500">
          UGALDEMMJ
         </a></p>

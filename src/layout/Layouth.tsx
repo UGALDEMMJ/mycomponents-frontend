@@ -12,7 +12,7 @@ const Layouth = () => {
     return (
         <div className="flex min-h-screen flex-col bg-black">
             {/* Pasa funcion para usar el sidebar */}
-            <Header onToggleSidebar={toggleSidebar} />
+            <Header onToggleSidebar={toggleSidebar} isSidebarOpen={showSidebar} />
             <div className="flex flex-1">
                 <main className="flex-1 p-4 transition-all duration-1000 ease-in-out">
                     <Outlet />
