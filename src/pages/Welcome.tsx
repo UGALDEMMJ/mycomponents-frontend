@@ -31,7 +31,7 @@ const texts: Texts[] = [
     link: "/dashboard",
     colors: {
       text:
-        "animate-pulse text-cyan-600 transition-colors duration-300 ease-in-out hover:text-cyan-400 hover:border-b",
+        "animate-pulse text-cyan-600 transition-colors duration-300 ease-in-out hover:text-cyan-400 hover:border-b hover:animate-none",
     },
   },
 ];
@@ -48,6 +48,7 @@ const Welcome: React.FC = () => {
 
   useGSAP(() => {
     if (!containerRef.current) return;
+    let observer: any = null;
 
     // Esperar a que el DOM esté completamente listo
     const initAnimation = () => {
@@ -158,7 +159,7 @@ const Welcome: React.FC = () => {
       };
 
       // Configurar Observer
-      Observer.create({
+      observer = Observer.create({
         target: window,
         type: "wheel,touch,pointer",
         wheelSpeed: -1,
@@ -176,7 +177,11 @@ const Welcome: React.FC = () => {
 
     // Pequeño retraso para asegurar que el DOM está listo
     const timeout = setTimeout(initAnimation, 50);
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      if(observer) observer.kill();
+      gsap.killTweensOf("*");
+    };
   }, { scope: containerRef });
 
   return (
