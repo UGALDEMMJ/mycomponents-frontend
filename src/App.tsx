@@ -6,7 +6,7 @@ import Layouth from './layout/Layouth'
 
 const App = () => {
   return (
-    <BrowserRouter basename='/mycomponents-frontend'>
+    <BrowserRouter>
     
     <Routes>
       <Route path='/'>
