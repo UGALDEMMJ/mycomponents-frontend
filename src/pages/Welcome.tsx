@@ -87,7 +87,7 @@ const Welcome: React.FC = () => {
 
       const splitHeadings = headings.map((heading) => {
         return new SplitText(heading, {
-          type: "chars",
+          type: "words, chars",
           charsClass: "char",
         });
       });
@@ -206,7 +206,7 @@ const Welcome: React.FC = () => {
         };
         const renderContent = () => (
           <div
-            className={`section-heading text-4xl md:text-6xl font-bold ${colors.text} w-fit`}
+            className={`section-heading break-keep text-4xl md:text-6xl font-bold ${colors.text} w-fit`}
           >
             {item.text}
           </div>

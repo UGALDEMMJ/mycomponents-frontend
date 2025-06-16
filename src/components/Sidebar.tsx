@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 export const Sidebar = () => {
   return (
@@ -6,10 +7,11 @@ export const Sidebar = () => {
         Categories
       </h2>
       <nav className='flex flex-col gap-2'>
-
+        {/* Aqui se cargan las categorias */}
       </nav>
       <div className='mt-auto pt-4 border-t border-zinc-700'>
-        <a className='flex items-center gap-3 p-2 w-full rounded-md hover:bg-zinc-800 transition-colors text-red-400' href=''>Admin</a>
+        <Link to={"/login"} className='flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white'>Admin
+        </Link>
       </div>
     </div>
   )

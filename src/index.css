@@ -14,5 +14,9 @@
     --font-space-mono: "Space Mono", monospace;
 }
 
+.char {
+    white-space: nowrap;
+    display: inline-block;
+}
 
 

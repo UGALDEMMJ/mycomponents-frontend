@@ -17,7 +17,7 @@ const Layouth = () => {
                 <main className="flex-1 p-4 transition-all duration-1000 ease-in-out">
                     <Outlet />
                 </main>
-                 <aside className={`bg-black border-b-4 border-s-4 border-amber-200 rounded-2xl transition-all duration-1000 ease-in-out
+                 <aside className={`bg-black border-b-4 border-s-4 border-cyan-200 rounded-2xl transition-all duration-1000 ease-in-out
                     ${showSidebar ? 'w-64 opacity-90 translate-x-0' : 'translate-x-full w-0 overflow-hidden'}`}>
                     <div className={`${showSidebar ? '' : 'fixed right-0 top-0 pointer-events-none opacity-0 translate-x-full'}
                          transition-all duration-1000 ease-in-out`}>

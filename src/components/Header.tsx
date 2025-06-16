@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/all";
+import {Link} from "react-router-dom";
 
 gsap.registerPlugin(MorphSVGPlugin);
 
@@ -28,9 +29,9 @@ export const Header: React.FC<HeadeProps> = (
   return (
     <header className="w-full bg-gradient-to-r bg-black p-4 flex justify-between">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl sm:text-3xl font-space-mono text-white mb-4">
+        <Link to={"/dashboard"} className="text-2xl sm:text-3xl font-space-mono text-white mb-4 hover:text-cyan-500">
           MyComponents
-        </h1>
+        </Link>
       </div>
       <div className="container mx-auto flex justify-end">
         <button
