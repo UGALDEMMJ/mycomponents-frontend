@@ -34,8 +34,8 @@ const Login = () => {
         if (!user.email || !user.password) {
             setAlert({ msg: "Invalid Credentials", error: true });
             return;
+            
         }
-
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
@@ -77,9 +77,9 @@ const Login = () => {
                             <span className="text-cyan-500">Components</span>
                         </p>
                     </div>
-                    {alert?.msg && <Alerta alert={alert} />}
                     <form onSubmit={handleSubmit} className="w-full">
                         <div className="space-y-1 m-4">
+                            {alert?.msg && <Alerta alert={alert} />}
                             <div className="space-y-2">
                                 <label
                                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

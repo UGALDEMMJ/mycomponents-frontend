@@ -5,6 +5,9 @@ import Dashboard from "./pages/Dashboard";
 import Layouth from "./layout/Layouth";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
+import AddCategory from "./pages/AddCategory";
+import AddTag from "./pages/AddTag";
+import AddPost from "./pages/AddPost";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import { AuthProvider } from "./context/AuthProvider";
 
@@ -25,6 +28,9 @@ const App = () => {
 
           <Route path="/admin" element={<ProtectedRoute/>}>
             <Route index element={<AdminDashboard/>}/>
+            <Route path="addpost" element={<AddPost/>}/>
+            <Route path="addcategory" element={<AddCategory/>}/>
+            <Route path="addtag" element={<AddTag/>}/>
           </Route>
 
         </Routes>

@@ -18,7 +18,7 @@ export const SidebarAdmin = () => {
         <button 
         type="button"
         onClick={logOut}
-        className='flex items-center gap-3 p-2 w-full rounded-md hover:bg-zinc-800 transition-colors text-white'>
+        className='flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors text-white'>
           LogOut</button>
       </div>
     </div>

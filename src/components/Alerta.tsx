@@ -12,8 +12,7 @@ const Alerta: React.FC<AlertProps> = ({ alert}) => {
 
     return (
         <div
-        className={`${alert.error ? 'bg-red-500' : 'bg-green-500}'} 
-        text-white text-center p-2 rounded-md my-2`}
+        className={`${alert.error ? 'bg-red-400' : 'bg-green-500}'} text-white text-center rounded-md py-2 m-5`}
         >
             {alert.msg}
         </div>
