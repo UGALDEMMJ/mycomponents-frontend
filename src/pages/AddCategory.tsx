@@ -1,28 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import Modal from "../components/Modal";
+import { Category, getCategories } from "../api/category";
+import { AlertaType } from "../api/tags";
 
 const AddCategory = () => {
-  type Category = {
-    name: string;
-    id: string;
-  };
-
-  interface AlertaType {
-    msg: string;
-    error: boolean;
-  }
-
-  interface DeleteResponse {
-    msg?: string;
-    [key: string]: any;
-  }
-
   const [category, setCategory] = useState<Category>({ name: "", id: "" });
   const [categories, setCategories] = useState<Category[]>([]);
   const [alert, setAlert] = useState<AlertaType | null>(null);
-  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const token = localStorage.getItem("token");
 
   const handleSubmit = async (
@@ -30,13 +16,12 @@ const AddCategory = () => {
   ): Promise<void> => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
-
+    const method = isEditing ? "PUT" : "POST";
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/categories`,
         {
-          method: "POST",
+          method,
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -52,8 +37,12 @@ const AddCategory = () => {
         });
         return;
       }
-      setAlert({ msg: data.msg || "Succesfully saved", error: false });
-      getCategories();
+      setAlert({ msg: data.msg || "Successfully saved", error: false });
+      const updatedTags = await getCategories(token!);
+      setCategories(updatedTags);
+      setModalOpen(false);
+      setCategory({ name: "", id: "" });
+      setIsEditing(false);
     } catch (error) {
       setAlert({ msg: "Conexion Error", error: true });
     }
@@ -83,38 +72,17 @@ const AddCategory = () => {
         return;
       }
       setAlert({ msg: data.msg || "Successfully deleted", error: false });
-      getCategories(); // Actualiza la lista después de borrar
-    } catch (error) {
-      setAlert({ msg: "Conexion Error", error: true });
-    }
-  };
-
-  const getCategories = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/categories/dashboard`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      const data = await response.json();
-      setCategories(data);
-      if (!response.ok) {
-        setAlert({ msg: data.msg || "Failed to save the tag", error: true });
-        return;
-      }
+      const updatedTags = await getCategories(token!);
+      setCategories(updatedTags);
     } catch (error) {
       setAlert({ msg: "Conexion Error", error: true });
     }
   };
 
   useEffect(() => {
-    getCategories();
-    console.log(categories);
+    getCategories(token!)
+      .then(setCategories)
+      .catch((err) => setAlert({ msg: err.message, error: true }));
   }, [token]);
 
   return (
@@ -143,7 +111,14 @@ const AddCategory = () => {
                       {cat.name}
                     </p>
                     <div className="p-5 space-x-4">
-                      <button className="text-white p-4 border border-cyan-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors">
+                      <button
+                        className="text-white p-4 border border-cyan-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
+                        onClick={() => {
+                          setCategory({ name: cat.name, id: cat.id });
+                          setIsEditing(true);
+                          setModalOpen(true);
+                        }}
+                      >
                         Update
                       </button>
                       <button
@@ -182,12 +157,16 @@ const AddCategory = () => {
               type="submit"
               className="outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
             >
-              Save
+              {isEditing ? "Update" : "Save"}
             </button>
             <button
               type="submit"
               className="outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
-              onClick={() => setModalOpen(false)}
+              onClick={() => {
+                setModalOpen(false);
+                setCategory({ name: "", id: "" });
+                setIsEditing(false);
+              }}
             >
               Cancel
             </button>
