@@ -3,9 +3,11 @@ import Modal from "../components/Modal";
 import { Component, getComponents } from "../api/components";
 import { AlertaType } from "../api/tags";
 import { Category, getCategories } from "../api/category";
+import { getTags, Tag } from "../api/tags";
+import { getUser, User } from "../api/users";
+import Select from "react-select";
 
 const AddPost = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
   const [component, setComponent] = useState<Component>({
     id: "",
     user_id: "",
@@ -14,20 +16,26 @@ const AddPost = () => {
     description: "",
     code: "",
   });
-  
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [user, setUser] = useState<User | null>(null);
   const [components, setComponents] = useState<Component[]>([]);
   const [alert, setAlert] = useState<AlertaType | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const token = localStorage.getItem("token");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLElement>,
+    idUser: string,
   ): Promise<void> => {
     e.preventDefault();
 
     try {
-      const url = `${import.meta.env.VITE_BACKEND_URL}/api/components`;
+      const url = isEditing
+        ? `${import.meta.env.VITE_BACKEND_URL}/api/components/${idUser}`
+        : `${import.meta.env.VITE_BACKEND_URL}/api/components`;
       const method = isEditing ? "PUT" : "POST";
       const response = await fetch(url, {
         method,
@@ -60,19 +68,22 @@ const AddPost = () => {
     }
   };
 
-  const handleDelete = async (id: string): Promise<void> => {
+  const handleDelete = async (
+    idPost: string,
+    idUser: string,
+  ): Promise<void> => {
     const confirmar = confirm("This component will be deleted, Delete anyway?");
     if (!confirmar) return;
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/components`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/components/${idUser}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ id }), // El id va en el body
+          body: JSON.stringify({ idPost }),
         },
       );
       const data = await response.json();
@@ -98,6 +109,14 @@ const AddPost = () => {
 
     getCategories(token!)
       .then(setCategories)
+      .catch((err) => setAlert({ msg: err.message, error: true }));
+
+    getUser(token!)
+      .then(setUser)
+      .catch((err) => setAlert({ msg: err.message, error: true }));
+
+    getTags(token!)
+      .then(setTags)
       .catch((err) => setAlert({ msg: err.message, error: true }));
   }, [token]);
 
@@ -126,17 +145,20 @@ const AddPost = () => {
                     <p className="text-white p-5">
                       {comp.name}
                     </p>
+                    <p className="text-white p-5">
+                      {comp.user_id === user?.id ? user?.name : ""}
+                    </p>
                     <div className="p-5 space-x-4">
                       <button
                         className="text-white p-4 border border-cyan-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
                         onClick={() => {
                           setComponent({
-                            id: "",
-                            user_id: "",
-                            category_id: "",
-                            name: "",
-                            description: "",
-                            code: "",
+                            id: comp.id,
+                            user_id: comp.user_id,
+                            category_id: comp.category_id,
+                            name: comp.name,
+                            description: comp.description,
+                            code: comp.code,
                           });
                           setIsEditing(true);
                           setModalOpen(true);
@@ -146,7 +168,7 @@ const AddPost = () => {
                       </button>
                       <button
                         className="text-white p-4 border border-red-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
-                        onClick={() => handleDelete(component.id)}
+                        onClick={() => handleDelete(comp.id, comp.user_id)}
                       >
                         Delete
                       </button>
@@ -167,7 +189,7 @@ const AddPost = () => {
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={(e) => handleSubmit(e, isEditing ? component.user_id : "")}
           className="grid grid-cols-2 grid-rows-3 w-4xl"
         >
           <div className="col-span-1">
@@ -178,19 +200,19 @@ const AddPost = () => {
               onChange={(e) =>
                 setComponent({ ...component, name: e.target.value })}
               className=" rounded p-2 w-2xs h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
-              placeholder="(ui, form, button)"
+              placeholder="(Login, Animate button, sidebar)"
               required
             />
           </div>
 
-           <div className="row-span-2">
+          <div className="row-span-2">
             <label className="block mb-2 text-white">Component Code</label>
             <textarea
               value={component.code}
               onChange={(e) =>
                 setComponent({ ...component, code: e.target.value })}
               className=" rounded p-2 w-full h-48 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
-              placeholder="Code"
+              placeholder="<Code>"
               required
             />
           </div>
@@ -213,6 +235,23 @@ const AddPost = () => {
             </select>
           </div>
 
+          <div className="col-span-1">
+            <label className="block mb-2 text-white">Component Tags</label>
+            <Select
+              isMulti
+              options={tags.map((tag) => ({ value: tag.id, label: tag.name }))}
+              value={tags.filter((tag) => selectedTags.includes(tag.id)).map(
+                (tag) => ({ value: tag.id, label: tag.name })
+              )}
+              onChange={(selected) => {
+                setSelectedTags(selected.map((option: any) => option.value));
+              }}
+              className=""
+              classNamePrefix="react-select"
+              placeholder="Select tags..."
+            />
+          </div>
+
           <div className="col-span-2">
             <label className="block mb-2 text-white w-fit">
               Component Description
@@ -222,7 +261,7 @@ const AddPost = () => {
               onChange={(e) =>
                 setComponent({ ...component, description: e.target.value })}
               className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
-              placeholder="(ui, form, button)"
+              placeholder="(Describe your component)"
               required
             />
           </div>
@@ -240,14 +279,14 @@ const AddPost = () => {
                 className="w-2xs outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
                 onClick={() => {
                   setModalOpen(false);
-                   setComponent({
-                            id: "",
-                            user_id: "",
-                            category_id: "",
-                            name: "",
-                            description: "",
-                            code: "",
-                          });
+                  setComponent({
+                    id: "",
+                    user_id: "",
+                    category_id: "",
+                    name: "",
+                    description: "",
+                    code: "",
+                  });
                   setIsEditing(false);
                 }}
               >

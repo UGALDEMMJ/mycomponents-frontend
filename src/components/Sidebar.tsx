@@ -4,7 +4,7 @@ export const Sidebar = () => {
   return (
     <div className='p-3 text-white font-space-mono'>
       <h2 className='text-white text-2xl'>
-        Categories
+        Public
       </h2>
       <nav className='flex flex-col gap-2'>
         {/* Aqui se cargan las categorias */}
