@@ -1,3 +1,4 @@
+
 export type Component = {
     id: string;
     user_id: string;

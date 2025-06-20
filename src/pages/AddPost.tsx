@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Select from "react-select";
 import Modal from "../components/Modal";
 import { Component, getComponents } from "../api/components";
 import { AlertaType } from "../api/tags";
 import { Category, getCategories } from "../api/category";
 import { getTags, Tag } from "../api/tags";
 import { getUser, User } from "../api/users";
-import Select from "react-select";
+import { customStyles } from "../config/customStyles";
 
 const AddPost = () => {
   const [component, setComponent] = useState<Component>({
@@ -43,7 +44,7 @@ const AddPost = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(component),
+        body: JSON.stringify({ ...component, tags: selectedTags }),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -205,13 +206,13 @@ const AddPost = () => {
             />
           </div>
 
-          <div className="row-span-2">
+          <div className="row-span-3">
             <label className="block mb-2 text-white">Component Code</label>
             <textarea
               value={component.code}
               onChange={(e) =>
                 setComponent({ ...component, code: e.target.value })}
-              className=" rounded p-2 w-full h-48 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
+              className=" rounded p-2 w-full h-60 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
               placeholder="<Code>"
               required
             />
@@ -235,7 +236,7 @@ const AddPost = () => {
             </select>
           </div>
 
-          <div className="col-span-1">
+          <div className="col-span-1 w-2xs">
             <label className="block mb-2 text-white">Component Tags</label>
             <Select
               isMulti
@@ -246,14 +247,13 @@ const AddPost = () => {
               onChange={(selected) => {
                 setSelectedTags(selected.map((option: any) => option.value));
               }}
-              className=""
-              classNamePrefix="react-select"
+              styles={customStyles}
               placeholder="Select tags..."
             />
           </div>
 
           <div className="col-span-2">
-            <label className="block mb-2 text-white w-fit">
+            <label className="block mb-2 text-white w-fit ">
               Component Description
             </label>
             <textarea
