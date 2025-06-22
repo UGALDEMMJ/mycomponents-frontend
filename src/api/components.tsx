@@ -6,6 +6,8 @@ export type Component = {
     name: string;
     description: string;
     code: string;
+    created_at?: Date;
+    tags?:[]
 };
 
 export const getComponents = async (token: string) => {

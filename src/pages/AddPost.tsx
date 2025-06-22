@@ -16,6 +16,7 @@ const AddPost = () => {
     name: "",
     description: "",
     code: "",
+    tags: []
   });
   const [categories, setCategories] = useState<Category[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
@@ -54,6 +55,7 @@ const AddPost = () => {
       setAlert({ msg: data.msg || "Succesfully saved", error: false });
       const updatedComponents = await getComponents(token!);
       setComponents(updatedComponents);
+      console.log(components); 
       setModalOpen(false);
       setComponent({
         id: "",
@@ -161,6 +163,7 @@ const AddPost = () => {
                             description: comp.description,
                             code: comp.code,
                           });
+                          setSelectedTags((comp.tags as Tag[] ?? []).map((tag) => tag.id))
                           setIsEditing(true);
                           setModalOpen(true);
                         }}

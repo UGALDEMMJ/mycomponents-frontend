@@ -7,7 +7,7 @@ const Dashboard: React.FC = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(250px,_auto)] gap-4 p-4 min-h-screen font-space-mono">
       {/*Primer card*/}
       <Link
-        to="/"
+        to="/allcomponents"
         className="col-span-1 sm:col-span-2 lg:col-span-2 lg:row-span-2 border rounded-lg shadow-md flex items-center justify-center group overflow-hidden p-4 transition-transform duration-300 ease-out"
       >
         {/* Overlay animado */}
@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
 
       {/*Segundo card*/}
       <Link
-        to={"/"}
+        to={"/mostused"}
         className="col-span-1 border rounded-lg shadow-md flex items-center justify-center group overflow-hidden p-4 transition-transform duration-300 ease-out min-h-[300px]"
       >
         {/* Overlay animado */}
@@ -78,7 +78,7 @@ const Dashboard: React.FC = () => {
 
       {/*Tercer card*/}
       <Link
-        to={"/"}
+        to={"/categories"}
         className="col-span-1 border rounded-lg shadow-md flex items-center justify-center group overflow-hidden p-4 transition-transform duration-300 ease-out min-h-[300px]"
       >
         {/* Overlay animado */}
@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
 
       {/*Cuarto card*/}
       <Link
-        to={"/"}
+        to={"/about"}
         className="col-span-1 sm:col-span-2 lg:col-span-3 border rounded-lg shadow-md flex items-center justify-center group overflow-hidden p-4 transition-transform duration-300 ease-out"
       >
         {/* Overlay animado */}
@@ -137,12 +137,14 @@ const Dashboard: React.FC = () => {
             className="relative flex flex-col items-center justify-center rounded-2xl bg-black p-8 shadow-xl w-full h-full outline-3 outline-white"
           >
             <h2 className="mb-4 text-center text-3xl font-semibold text-white">
-              Component Categories
+              About this project
             </h2>
-            <p className="text-xl text-white p-2">
-              Explore components organized by category. Quickly find what you
-              need by browsing through different types, styles, or
-              functionalities.
+            <p className="text-ms text-white p-2">
+              Discover the purpose and vision behind this project. Built to
+              streamline component management and accelerate development, this
+              platform empowers you to organize, reuse, and customize UI
+              elements efficiently. Learn more about the features, goals, and
+              the developer who made it possible.
             </p>
           </motion.div>
         </div>
