@@ -139,9 +139,10 @@ const AddTag = () => {
         </div>
       </div>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <form onSubmit={handleSubmit}>
+        <form className="w-4xs" onSubmit={handleSubmit}>
           <label className="block mb-2 text-white">Tag Name</label>
           <input
+            autoFocus
             type="text"
             value={tag.name}
             onChange={(e) => setTag({ ...tag, name: e.target.value })}
@@ -170,7 +171,7 @@ const AddTag = () => {
           </div>
           {alert && (
             <div
-              className={`mt-4 p-2 rounded ${
+              className={`mt-4 p-2 rounded${
                 alert.error
                   ? "bg-red-200 text-red-800"
                   : "bg-green-200 text-green-800"

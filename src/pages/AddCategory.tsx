@@ -142,13 +142,13 @@ const AddCategory = () => {
         </div>
       </div>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <form onSubmit={handleSubmit}>
+        <form className="w-4xs" onSubmit={handleSubmit}>
           <label className="block mb-2 text-white">Category Name</label>
           <input
             type="text"
             value={category.name}
             onChange={(e) => setCategory({ ...category, name: e.target.value })}
-            className=" rounded p-2 w-2xs h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
+            className=" rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
             placeholder="(Tailwind, css, Bootstrap)"
             required
           />
