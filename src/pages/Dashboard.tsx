@@ -33,8 +33,8 @@ const Dashboard: React.FC = () => {
               All Components
             </h2>
             <p className="text-lg text-white p-10">
-              Browse the complete collection of available components. Find,
-              reuse, or edit the elements you need to speed up your development
+              Browse the complete collection of available components. 
+              Find the elements you need to speed up your development
               and maintain consistency across your projects.
             </p>
           </motion.div>
@@ -140,11 +140,7 @@ const Dashboard: React.FC = () => {
               About this project
             </h2>
             <p className="text-ms text-white p-2">
-              Discover the purpose and vision behind this project. Built to
-              streamline component management and accelerate development, this
-              platform empowers you to organize, reuse, and customize UI
-              elements efficiently. Learn more about the features, goals, and
-              the developer who made it possible.
+              This project serves as a personal library for me, the developer, to save and revisit my own UI components. It’s a space to store, review, and experiment with elements I’ve built throughout my development journey.
             </p>
           </motion.div>
         </div>

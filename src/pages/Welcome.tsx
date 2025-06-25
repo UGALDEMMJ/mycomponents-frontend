@@ -18,10 +18,10 @@ gsap.registerPlugin(useGSAP, Observer, SplitText);
 
 const texts: Texts[] = [
   {
-    text: "Your personal UI component library.",
+    text: "Personal UI component library.",
   },
   {
-    text: "Store, preview, and organize reusable UI components with ease.",
+    text: "Use, and preview reusable UI components with ease.",
   },
   {
     text: "Discover components by categories, check out the most viewed ones.",
