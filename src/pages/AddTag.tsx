@@ -41,7 +41,6 @@ const AddTag = () => {
     } catch (error) {
       setAlert({ msg: "Conexion Error", error: true });
     }
-    setAlert(null);
   };
 
   const handleDelete = async (id: string): Promise<void> => {
@@ -73,7 +72,6 @@ const AddTag = () => {
     } catch (error) {
       setAlert({ msg: "Conexion Error", error: true });
     }
-    setAlert(null);
   };
 
   useEffect(() => {
