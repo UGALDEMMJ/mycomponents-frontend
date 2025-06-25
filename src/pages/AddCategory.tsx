@@ -173,7 +173,7 @@ const AddCategory = () => {
           </div>
           {alert && (
             <div
-              className={`mt-4 p-2 rounded${
+              className={`mt-4 p-2 rounded ${
                 alert.error
                   ? "bg-red-200 text-red-800"
                   : "bg-green-200 text-green-800"
