@@ -3,6 +3,7 @@ import { Component, getComponents } from "../api/components";
 import { Category, getCategories } from "../api/category";
 import { getUsers, User } from "../api/users";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
+import { motion } from "motion/react";
 
 const AllComponents = () => {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -71,7 +72,7 @@ const AllComponents = () => {
                                                     {comp.code}
                                                 </pre>
                                             ) : (
-                                                <LiveProvider code={comp.code}>
+                                                <LiveProvider scope={{motion}} language="jsx" code={comp.code}>
                                                     <LivePreview />
                                                     <LiveError />
                                                 </LiveProvider>
