@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Alerta from "../components/Alerta";
-import useAuth from "../hooks/useAuth";
+import Alerta from "../../components/Alerta";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
     type UserInfo = {

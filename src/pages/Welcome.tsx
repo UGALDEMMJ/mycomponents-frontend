@@ -195,8 +195,8 @@ const Welcome: React.FC = () => {
           className="font-bold hover:text-cyan-500">
          UGALDEMMJ
         </a></p>
-        <div className="text-sm opacity-80 animate-pulse transition-colors duration-300">Scroll to navigate</div>
-        <a href="/dashboard" className="text-sm opacity-80 hover:text-cyan-500 font-bold">MyComponents</a>
+        <div className="text-sm opacity-50 animate-pulse transition-colors duration-300">Scroll to navigate</div>
+        <a href="/dashboard" className="text-sm opacity-50 hover:text-cyan-500 font-bold">MyComponents</a>
       </header>
 
       {texts.map((item, index) => {

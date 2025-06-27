@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Modal from "../components/Modal";
-import { getTags, AlertaType, Tag } from "../api/tags";
+import Modal from "../../components/Modal";
+import { getTags, AlertaType, Tag } from "../../api/tags";
 
 const AddTag = () => {
 

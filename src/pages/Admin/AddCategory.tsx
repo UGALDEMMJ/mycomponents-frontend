@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Modal from "../components/Modal";
-import { Category, getCategories } from "../api/category";
-import { AlertaType } from "../api/tags";
+import Modal from "../../components/Modal";
+import { Category, getCategories } from "../../api/category";
+import { AlertaType } from "../../api/tags";
 
 const AddCategory = () => {
   const [category, setCategory] = useState<Category>({ name: "", id: "" });

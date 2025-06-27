@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Component, getComponents } from "../api/components";
-import { Category, getCategories } from "../api/category";
-import { getUsers, User } from "../api/users";
+import { Component, getComponents } from "../../api/components";
+import { Category, getCategories } from "../../api/category";
+import { getUsers, User } from "../../api/users";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
 import { motion } from "motion/react";
 

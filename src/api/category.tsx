@@ -24,3 +24,24 @@ export const getCategories = async (token: string) => {
         throw error;
     }
 };
+
+export const getCategoriesPosts = async (id: string) => {
+    try {
+        const response = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/api/categories/posts/${id}`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.msg || "Failed to get tags");
+        }
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}

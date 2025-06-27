@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Category, getCategories } from "../api/category";
+import { Category, getCategories } from "../../api/category";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -21,16 +22,17 @@ const Categories = () => {
               </h2>
               <div className="grid grid-cols-3 gap-8 text-white">
                 {categories.map((cat) => (
-                  <div
+                  <Link
+                    to={`/categoriesposts?category=${cat.id}`}
                     key={cat.id}
-                    className="border rounded-2xl border-cyan-500 flex flex-col w-2xs bg-black/80 shadow-lg"
+                    className="border rounded-2xl border-cyan-500 flex flex-col w-2xs hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors to-black shadow-lg"
                   >
                     <div className="justify-between items-center p-5">
                       <div>
                           {cat.name}
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </>

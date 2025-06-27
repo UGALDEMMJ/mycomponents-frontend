@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import Modal from "../components/Modal";
-import { Component, getComponents } from "../api/components";
-import { AlertaType } from "../api/tags";
-import { Category, getCategories } from "../api/category";
-import { getTags, Tag } from "../api/tags";
-import { getUser, User } from "../api/users";
-import { customStyles } from "../config/customStyles";
+import Modal from "../../components/Modal";
+import { Component, getComponents } from "../../api/components";
+import { AlertaType } from "../../api/tags";
+import { Category, getCategories } from "../../api/category";
+import { getTags, Tag } from "../../api/tags";
+import { getUser, User } from "../../api/users";
+import { customStyles } from "../../config/customStyles";
 
 const AddPost = () => {
   const [component, setComponent] = useState<Component>({
