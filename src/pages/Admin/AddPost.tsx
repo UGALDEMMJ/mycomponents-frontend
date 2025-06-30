@@ -55,7 +55,6 @@ const AddPost = () => {
       setAlert({ msg: data.msg || "Succesfully saved", error: false });
       const updatedComponents = await getComponents(token!);
       setComponents(updatedComponents);
-      console.log(components); 
       setModalOpen(false);
       setComponent({
         id: "",
@@ -124,69 +123,69 @@ const AddPost = () => {
   }, [token]);
 
   return (
-    <div className="gap-4 p-4 min-h-screen font-space-mono">
-      <div>
-        <h2 className="text-3xl text-white">Let's Add a new Component</h2>
-        <div className="flex justify-center p-8">
+    <div className="gap-4 p-2 sm:p-4 min-h-screen font-space-mono bg-black">
+      <div className="max-w-3xl mx-auto w-full">
+        <h2 className="text-2xl sm:text-3xl text-white text-center mt-4">Let's Add a new Component</h2>
+        <div className="flex justify-center p-4 sm:p-8">
           <button
-            className=" text-white text-3xl relative inline-flex items-center justify-center mb-2 me-2 overflow-hidden font-medium rounded-lg hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors to-black p-4 outline-cyan-500 outline-1"
+            className="text-white text-xl sm:text-2xl relative inline-flex items-center justify-center mb-2 me-2 overflow-hidden font-medium rounded-lg hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors to-black p-3 sm:p-4 outline-cyan-500 outline-1"
             onClick={() => setModalOpen(true)}
           >
             Add Component
           </button>
         </div>
-        <div className="border-t-2 border-gray-500 p-8">
+        <div className="border-t-2 border-gray-500 p-2 sm:p-8">
           {components.length
             ? (
               <>
-                <h2 className="text-white text-5xl p-10">List of Components</h2>
-                {components.map((comp, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-cyan-500 flex justify-between items-center"
-                  >
-                    <p className="text-white p-5">
-                      {comp.name}
-                    </p>
-                    <p className="text-white p-5">
-                      {comp.user_id === user?.id ? user?.name : ""}
-                    </p>
-                    <div className="p-5 space-x-4">
-                      <button
-                        className="text-white p-4 border border-cyan-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
-                        onClick={() => {
-                          setComponent({
-                            id: comp.id,
-                            user_id: comp.user_id,
-                            category_id: comp.category_id,
-                            name: comp.name,
-                            description: comp.description,
-                            code: comp.code,
-                          });
-                          setSelectedTags((comp.tags as Tag[] ?? []).map((tag) => tag.id))
-                          setIsEditing(true);
-                          setModalOpen(true);
-                        }}
-                      >
-                        Update
-                      </button>
-                      <button
-                        className="text-white p-4 border border-red-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
-                        onClick={() => handleDelete(comp.id, comp.user_id)}
-                      >
-                        Delete
-                      </button>
+                <h2 className="text-white text-2xl sm:text-4xl p-4 sm:p-10 text-center">List of Components</h2>
+                <div className="flex flex-col gap-2">
+                  {components.map((comp, idx) => (
+                    <div
+                      key={idx}
+                      className="border border-cyan-500 flex flex-col sm:flex-row justify-between items-center rounded-lg bg-black/80 shadow-sm"
+                    >
+                      <p className="text-white p-3 sm:p-5 text-base sm:text-lg">
+                        {comp.name}
+                      </p>
+                      <p className="text-white p-3 sm:p-5 text-xs sm:text-base">
+                        {comp.user_id === user?.id ? user?.name : ""}
+                      </p>
+                      <div className="flex gap-2 p-3 sm:p-5">
+                        <button
+                          className="text-white px-3 py-2 border border-cyan-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-xs sm:text-base"
+                          onClick={() => {
+                            setComponent({
+                              id: comp.id,
+                              user_id: comp.user_id,
+                              category_id: comp.category_id,
+                              name: comp.name,
+                              description: comp.description,
+                              code: comp.code,
+                            });
+                            setSelectedTags((comp.tags as Tag[] ?? []).map((tag) => tag.id))
+                            setIsEditing(true);
+                            setModalOpen(true);
+                          }}
+                        >
+                          Update
+                        </button>
+                        <button
+                          className="text-white px-3 py-2 border border-red-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors text-xs sm:text-base"
+                          onClick={() => handleDelete(comp.id, comp.user_id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </>
             )
             : (
-              <>
-                <h2 className="text-3xl text-white text-center">
-                  There is not Components yet!!
-                </h2>
-              </>
+              <h2 className="text-xl sm:text-3xl text-white text-center py-8">
+                There are no Components yet!
+              </h2>
             )}
         </div>
       </div>
@@ -194,7 +193,7 @@ const AddPost = () => {
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <form
           onSubmit={(e) => handleSubmit(e, isEditing ? component.user_id : "")}
-          className="grid grid-cols-2 grid-rows-3 w-4xl"
+          className="w-full max-w-lg mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           <div className="col-span-1">
             <label className="block mb-2 text-white">Component Name</label>
@@ -203,19 +202,19 @@ const AddPost = () => {
               value={component.name}
               onChange={(e) =>
                 setComponent({ ...component, name: e.target.value })}
-              className=" rounded p-2 w-2xs h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
+              className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
               placeholder="(Login, Animate button, sidebar)"
               required
             />
           </div>
 
-          <div className="row-span-3">
+          <div className="col-span-1 sm:row-span-3">
             <label className="block mb-2 text-white">Component Code</label>
             <textarea
               value={component.code}
               onChange={(e) =>
                 setComponent({ ...component, code: e.target.value })}
-              className=" rounded p-2 w-full h-60 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
+              className="rounded p-2 w-full h-40 sm:h-60 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
               placeholder="<Code>"
               required
             />
@@ -227,7 +226,7 @@ const AddPost = () => {
               value={component.category_id || ""}
               onChange={(e) =>
                 setComponent({ ...component, category_id: e.target.value })}
-              className="rounded p-2 w-2xs h-10 mb-4 outline-1 outline-cyan-500 text-white text-xs bg-black"
+              className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 text-white text-xs bg-black border border-cyan-500"
               required
             >
               <option value="">Select a category</option>
@@ -239,7 +238,7 @@ const AddPost = () => {
             </select>
           </div>
 
-          <div className="col-span-1 w-2xs">
+          <div className="col-span-1">
             <label className="block mb-2 text-white">Component Tags</label>
             <Select
               isMulti
@@ -255,7 +254,7 @@ const AddPost = () => {
             />
           </div>
 
-          <div className="col-span-2">
+          <div className="col-span-1 sm:col-span-2">
             <label className="block mb-2 text-white w-fit ">
               Component Description
             </label>
@@ -263,23 +262,23 @@ const AddPost = () => {
               value={component.description}
               onChange={(e) =>
                 setComponent({ ...component, description: e.target.value })}
-              className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
+              className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
               placeholder="(Describe your component)"
               required
             />
           </div>
 
-          <div className="col-span-2">
-            <div className="flex flex-row justify-center">
+          <div className="col-span-1 sm:col-span-2">
+            <div className="flex flex-col sm:flex-row justify-center gap-2">
               <button
                 type="submit"
-                className="w-2xs outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
+                className="w-full sm:w-auto outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
               >
                 {isEditing ? "Update" : "Save"}
               </button>
               <button
-                type="submit"
-                className="w-2xs outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
+                type="button"
+                className="w-full sm:w-auto outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
                 onClick={() => {
                   setModalOpen(false);
                   setComponent({
@@ -298,7 +297,7 @@ const AddPost = () => {
             </div>
             {alert && (
               <div
-                className={`mt-4 p-2 rounded ${
+                className={`mt-4 p-2 rounded text-center ${
                   alert.error
                     ? "bg-red-200 text-red-800"
                     : "bg-green-200 text-green-800"

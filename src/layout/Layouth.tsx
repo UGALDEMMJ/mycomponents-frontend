@@ -58,15 +58,17 @@ const Layouth = () => {
                             className="fixed inset-0 bg-black bg-opacity-50"
                             onClick={toggleSidebarMobile}
                         />
-                        {/* Drawer */}
-                        <div className="relative w-64 bg-black border-b-4 border-s-4 border-cyan-200 rounded-2xl shadow-lg z-50">
-                            <Sidebar />
+                        {/* Drawer ocupa toda la pantalla */}
+                        <div className="flex flex-col relative w-full h-full bg-black border-4 border-cyan-200 rounded-2xl shadow-lg z-50">
                             <button
                                 className="absolute top-2 right-2 text-cyan-400"
                                 onClick={toggleSidebarMobile}
                             >
                                 Close
                             </button>
+                            <div className="pt-14 px-2 h-full overflow-y-auto">
+                                <Sidebar />
+                            </div>
                         </div>
                     </aside>
                 )}

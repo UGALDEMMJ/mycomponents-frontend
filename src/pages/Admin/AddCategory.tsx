@@ -60,7 +60,7 @@ const AddCategory = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ id }), // El id va en el body
+          body: JSON.stringify({ id }),
         },
       );
       const data = await response.json();
@@ -86,73 +86,77 @@ const AddCategory = () => {
   }, [token]);
 
   return (
-    <div className="gap-4 p-4 min-h-screen font-space-mono">
-      <div>
-        <h2 className="text-3xl text-white">Let's Add a new Category</h2>
-        <div className="flex justify-center p-8">
+    <div className="gap-4 p-2 sm:p-4 min-h-screen font-space-mono bg-black">
+      <div className="max-w-2xl mx-auto w-full">
+        <h2 className="text-2xl sm:text-3xl text-white text-center mt-4">
+          Let's Add a new Category
+        </h2>
+        <div className="flex justify-center p-4 sm:p-8">
           <button
-            className=" text-white text-3xl relative inline-flex items-center justify-center mb-2 me-2 overflow-hidden font-medium rounded-lg hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors to-black p-4 outline-cyan-500 outline-1"
+            className="text-white text-xl sm:text-2xl relative inline-flex items-center justify-center mb-2 me-2 overflow-hidden font-medium rounded-lg hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors to-black p-3 sm:p-4 outline-cyan-500 outline-1"
             onClick={() => setModalOpen(true)}
           >
             Add Category
           </button>
         </div>
-        <div className="border-t-2 border-gray-500 p-8">
+        <div className="border-t-2 border-gray-500 p-2 sm:p-8">
           {categories.length
             ? (
               <>
-                <h2 className="text-white text-5xl p-10">List of Categories</h2>
-                {categories.map((cat, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-cyan-500 flex justify-between items-center"
-                  >
-                    <p className="text-white p-5">
-                      {cat.name}
-                    </p>
-                    <div className="p-5 space-x-4">
-                      <button
-                        className="text-white p-4 border border-cyan-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
-                        onClick={() => {
-                          setCategory({ name: cat.name, id: cat.id });
-                          setIsEditing(true);
-                          setModalOpen(true);
-                        }}
-                      >
-                        Update
-                      </button>
-                      <button
-                        className="text-white p-4 border border-red-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
-                        onClick={() => handleDelete(cat.id)}
-                      >
-                        Delete
-                      </button>
+                <h2 className="text-white text-2xl sm:text-4xl p-4 sm:p-10 text-center">
+                  List of Categories
+                </h2>
+                <div className="flex flex-col gap-2">
+                  {categories.map((cat, idx) => (
+                    <div
+                      key={idx}
+                      className="border border-cyan-500 flex flex-col sm:flex-row justify-between items-center rounded-lg bg-black/80 shadow-sm"
+                    >
+                      <p className="text-white p-3 sm:p-5 text-base sm:text-lg">
+                        {cat.name}
+                      </p>
+                      <div className="flex gap-2 p-3 sm:p-5">
+                        <button
+                          className="text-white px-3 py-2 border border-cyan-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-xs sm:text-base"
+                          onClick={() => {
+                            setCategory({ name: cat.name, id: cat.id });
+                            setIsEditing(true);
+                            setModalOpen(true);
+                          }}
+                        >
+                          Update
+                        </button>
+                        <button
+                          className="text-white px-3 py-2 border border-red-500 rounded-md hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors text-xs sm:text-base"
+                          onClick={() => handleDelete(cat.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </>
             )
             : (
-              <>
-                <h2 className="text-3xl text-white text-center">
-                  There is not Tags yet!!
-                </h2>
-              </>
+              <h2 className="text-xl sm:text-3xl text-white text-center py-8">
+                There are no Categories yet!
+              </h2>
             )}
         </div>
       </div>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <form className="w-4xs" onSubmit={handleSubmit}>
+        <form className="w-full max-w-xs sm:max-w-sm mx-auto" onSubmit={handleSubmit}>
           <label className="block mb-2 text-white">Category Name</label>
           <input
             type="text"
             value={category.name}
             onChange={(e) => setCategory({ ...category, name: e.target.value })}
-            className=" rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs"
+            className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
             placeholder="(Tailwind, css, Bootstrap)"
             required
           />
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2">
             <button
               type="submit"
               className="outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
@@ -160,7 +164,7 @@ const AddCategory = () => {
               {isEditing ? "Update" : "Save"}
             </button>
             <button
-              type="submit"
+              type="button"
               className="outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
               onClick={() => {
                 setModalOpen(false);
@@ -173,7 +177,7 @@ const AddCategory = () => {
           </div>
           {alert && (
             <div
-              className={`mt-4 p-2 rounded ${
+              className={`mt-4 p-2 rounded text-center ${
                 alert.error
                   ? "bg-red-200 text-red-800"
                   : "bg-green-200 text-green-800"
