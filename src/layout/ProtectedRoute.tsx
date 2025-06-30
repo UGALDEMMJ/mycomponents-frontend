@@ -7,9 +7,13 @@ import useAuth from "../hooks/useAuth";
 
 const ProtectedRoute = () => {
     const [showSidebar, setShowSidebar] = useState(false);
-        const toggleSidebar = () =>{
-            setShowSidebar(!showSidebar);
-        };
+    const [showSidebarMovil, setShowSidebarshowSidebarMovil] = useState(false);
+    const toggleSidebar = () => {
+        setShowSidebar(!showSidebar);
+    };
+    const toggleSidebarMobile = () => {
+        setShowSidebarshowSidebarMovil(!showSidebarMovil);
+    };
     const { auth, loading } = useAuth();
     if (loading) return "loading...";
 
@@ -18,7 +22,9 @@ const ProtectedRoute = () => {
             {/* Pasa funcion para usar el sidebar */}
             <Header
                 onToggleSidebar={toggleSidebar}
+                onToggleSidebarMobile={toggleSidebarMobile}
                 isSidebarOpen={showSidebar}
+                isSidebarOpenMovil={showSidebarMovil}
             />
             <div className="flex flex-1">
                 {auth?.id
