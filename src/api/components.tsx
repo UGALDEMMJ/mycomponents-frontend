@@ -31,3 +31,16 @@ export const getComponents = async (token: string) => {
         throw error;
     }
 };
+
+export const updateComponentClicks = async (componentId: string) => {
+    try {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/components/clicks/${componentId}`, {
+            method: "PUT", 
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    } catch (error) {
+        console.error("Error updating clicks:", error);
+    }
+};

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Component, getComponents } from "../../api/components";
+import { Component, getComponents, updateComponentClicks } from "../../api/components";
 import { Category, getCategories } from "../../api/category";
 import { getUsers, User } from "../../api/users";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
@@ -33,7 +33,8 @@ const AllComponents = () => {
 
     return (
         <div className="min-h-screen font-space-mono bg-black">
-            <section className="border-t-2 border-cyan-500 px-1 sm:px-4 py-2 sm:py-6 space-y-2 max-w-3xl mx-auto">
+            <div className="border-t-2 border-cyan-500"></div>
+            <section className="px-1 sm:px-4 py-2 sm:py-6 space-y-2 max-w-3xl mx-auto">
                 {components.length ? (
                     <>
                         <h2 className="text-white text-2xl sm:text-4xl p-2 sm:p-6 text-center">
@@ -60,14 +61,26 @@ const AllComponents = () => {
                                                 }
                                             </p>
                                         </div>
-                                        <button
-                                            className="border border-cyan-500 rounded px-2 py-1 sm:px-3 sm:py-1 text-cyan-400 hover:bg-cyan-900 transition mt-2 sm:mt-0 text-xs sm:text-base"
-                                            onClick={() => toggleView(comp.id)}
-                                        >
-                                            {showCode[comp.id]
-                                                ? "Show Preview"
-                                                : "Show Code"}
-                                        </button>
+                                        <div className="flex gap-2 mt-2 sm:mt-0">
+                                            <button
+                                                className="border border-cyan-500 rounded px-2 py-1 sm:px-3 sm:py-1 text-cyan-400 hover:bg-cyan-900 transition text-xs sm:text-base"
+                                                onClick={() => toggleView(comp.id)}
+                                            >
+                                                {showCode[comp.id]
+                                                    ? "Show Preview"
+                                                    : "Show Code"}
+                                            </button>
+                                            <button
+                                                className="border border-cyan-500 rounded px-2 py-1 sm:px-3 sm:py-1 text-cyan-400 hover:bg-cyan-900 transition text-xs sm:text-base"
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText(comp.code);
+                                                    updateComponentClicks(comp.id); // Asegúrate de tener esta función implementada
+                                                }}
+                                                title="Copy code"
+                                            >
+                                                Copy Code
+                                            </button>
+                                        </div>
                                     </div>
                                     <div className="px-2 sm:px-4 pb-1">
                                         {showCode[comp.id] ? (
