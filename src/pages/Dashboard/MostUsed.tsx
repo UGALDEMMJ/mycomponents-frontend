@@ -18,7 +18,7 @@ const MostUsed = () => {
     };
 
     useEffect(() => {
-        getMostUsed(null!)
+        getMostUsed()
             .then(setComponents)
             .catch((err) => console.log({ msg: err.message, error: true }));
 
