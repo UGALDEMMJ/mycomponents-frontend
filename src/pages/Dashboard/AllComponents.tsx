@@ -18,7 +18,7 @@ const AllComponents = () => {
     };
 
     useEffect(() => {
-        getComponents(null!)
+        getComponents()
             .then(setComponents)
             .catch((err) => console.log({ msg: err.message, error: true }));
 
