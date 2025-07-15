@@ -38,7 +38,7 @@ const MostUsed = () => {
                 {components.length ? (
                     <>
                         <h2 className="text-white text-2xl sm:text-4xl p-2 sm:p-6 text-center">
-                            List of All Components
+                            Most Used Components 🔥
                         </h2>
                         <div className="flex flex-col items-center gap-4 text-white">
                             {components.map((comp) => (

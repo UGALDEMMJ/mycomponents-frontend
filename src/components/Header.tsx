@@ -19,14 +19,21 @@ export const Header: React.FC<HeadeProps> = (
   const iconRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
-    if (!iconRef) return;
-    const target = isSidebarOpen ? "#icon-close" : "#icon-open";
+    if (!iconRef.current) return;
 
-    gsap.to(iconRef.current, {
+    const target = isSidebarOpen ? "#icon-close" : "#icon-open";
+    const targetElement = document.querySelector(target);
+    if (!targetElement) return;
+
+    const tween = gsap.to(iconRef.current, {
       duration: 0.5,
       morphSVG: target,
       ease: "power1.inOut",
     });
+
+    return () => {
+      tween.kill();
+    };
   }, [isSidebarOpen]);
 
   return (
@@ -62,12 +69,17 @@ export const Header: React.FC<HeadeProps> = (
               fill="none"
             />
             {/* Iconos ocultos (objetivo del morph) */}
-            <path id="icon-open" d="M20,50 L80,50" fill="none" stroke="none" />
+            <path
+              id="icon-open"
+              d="M20,50 L80,50"
+              fill="none"
+              stroke="transparent"
+            />
             <path
               id="icon-close"
               d="M30,50 L70,50 M50,30 L50,70"
               fill="none"
-              stroke="none"
+              stroke="transparent"
             />
           </svg>
         </button>

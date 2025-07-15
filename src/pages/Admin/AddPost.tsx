@@ -124,6 +124,7 @@ const AddPost = () => {
 
   return (
     <div className="gap-4 p-2 sm:p-4 min-h-screen font-space-mono bg-black">
+      <div className="border-t-2 border-cyan-500"></div>
       <div className="max-w-3xl mx-auto w-full">
         <h2 className="text-2xl sm:text-3xl text-white text-center mt-4">Let's Add a new Component</h2>
         <div className="flex justify-center p-4 sm:p-8">
@@ -134,7 +135,7 @@ const AddPost = () => {
             Add Component
           </button>
         </div>
-        <div className="border-t-2 border-gray-500 p-2 sm:p-8">
+        <div className="p-2 sm:p-8">
           {components.length
             ? (
               <>

@@ -21,28 +21,22 @@ const App = () => {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/">
+          <Route path="/" element={<Layouth />}>
             <Route index element={<Welcome />} />
-            <Route element={<Layouth />}>
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="allcomponents" element={<AllComponents />} />
-              <Route path="mostused" element={<MostUsed />} />
-              <Route path="categories" element={<Categories />} />
-              <Route path="categoriesposts" element={<CategoriesPost />} />
-              <Route path="about" element={<About />} />
-            </Route>
-              <Route path="/login" element={<Login />}/>
-              {/* SignIn */}
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="allcomponents" element={<AllComponents />} />
+            <Route path="mostused" element={<MostUsed />} />
+            <Route path="categories" element={<Categories />} />
+            <Route path="categoriesposts" element={<CategoriesPost />} />
+            <Route path="about" element={<About />} />
           </Route>
-
-          <Route path="/admin" element={<ProtectedRoute/>}>
-            <Route index element={<AdminDashboard/>}/>
-            <Route path="addpost" element={<AddPost/>}/>
-            <Route path="addcategory" element={<AddCategory/>}/>
-            <Route path="addtag" element={<AddTag/>}/>
-
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<ProtectedRoute />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="addpost" element={<AddPost />} />
+            <Route path="addcategory" element={<AddCategory />} />
+            <Route path="addtag" element={<AddTag />} />
           </Route>
-
         </Routes>
       </AuthProvider>
     </BrowserRouter>

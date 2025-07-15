@@ -81,6 +81,7 @@ const AddTag = () => {
 
   return (
     <div className="gap-4 p-2 sm:p-4 min-h-screen font-space-mono bg-black">
+      <div className="border-t-2 border-cyan-500"></div>
       <div className="max-w-2xl mx-auto w-full">
         <h2 className="text-2xl sm:text-3xl text-white text-center mt-4">
           Let's Add a new Tag
@@ -93,7 +94,7 @@ const AddTag = () => {
             Add Tag
           </button>
         </div>
-        <div className="border-t-2 border-gray-500 p-2 sm:p-8">
+        <div className=" p-2 sm:p-8">
           {tags.length ? (
             <>
               <h2 className="text-white text-2xl sm:text-4xl p-4 sm:p-10 text-center">
