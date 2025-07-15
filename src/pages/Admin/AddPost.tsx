@@ -53,7 +53,7 @@ const AddPost = () => {
         return;
       }
       setAlert({ msg: data.msg || "Succesfully saved", error: false });
-      const updatedComponents = await getComponents(token!);
+      const updatedComponents = await getComponents();
       setComponents(updatedComponents);
       setModalOpen(false);
       setComponent({
@@ -97,7 +97,7 @@ const AddPost = () => {
         return;
       }
       setAlert({ msg: data.msg || "Succesfully deleted", error: false });
-      const updatedComponents = await getComponents(token!);
+      const updatedComponents = await getComponents();
       setComponents(updatedComponents);
     } catch (error) {
       setAlert({ msg: "Conexion Error", error: true });
@@ -105,7 +105,7 @@ const AddPost = () => {
   };
 
   useEffect(() => {
-    getComponents(token!)
+    getComponents()
       .then(setComponents)
       .catch((err) => setAlert({ msg: err.message, error: true }));
 
