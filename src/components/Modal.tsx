@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             onClick={onClose}
         >
             <div
-                className="outline-1 outline-cyan-400 rounded-lg p-6 min-w-[300px] relative bg-black"
+                className="outline-1 outline-cyan-400 rounded-lg p-6 max-w-[90vw] max-h-[80vh] w-full sm:w-[50vw] overflow-y-auto relative bg-black"
                 onClick={e => e.stopPropagation()}
             >
                 {children}

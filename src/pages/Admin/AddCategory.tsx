@@ -147,17 +147,20 @@ const AddCategory = () => {
         </div>
       </div>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <form className="w-full max-w-xs sm:max-w-sm mx-auto" onSubmit={handleSubmit}>
-          <label className="block mb-2 text-white">Category Name</label>
+        <form
+          className="w-full max-w-[90%] sm:max-w-[50vw] mx-auto h-full flex flex-col justify-between overflow-y-auto"
+          onSubmit={handleSubmit}
+        >
+          <label className="block mb-2 text-white text-sm">Category Name</label>
           <input
             type="text"
             value={category.name}
             onChange={(e) => setCategory({ ...category, name: e.target.value })}
-            className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
+            className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-sm bg-black border border-cyan-500"
             placeholder="(Tailwind, css, Bootstrap)"
             required
           />
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-row gap-2 p-2 justify-center">
             <button
               type="submit"
               className="outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"

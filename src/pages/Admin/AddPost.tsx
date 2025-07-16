@@ -41,10 +41,11 @@ const AddPost = () => {
       const method = isEditing ? "PUT" : "POST";
       const response = await fetch(url, {
         method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers:
+          {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         body: JSON.stringify({ ...component, tags: selectedTags }),
       });
       const data = await response.json();
@@ -192,123 +193,129 @@ const AddPost = () => {
       </div>
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <form
-          onSubmit={(e) => handleSubmit(e, isEditing ? component.user_id : "")}
-          className="w-full max-w-lg mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4"
-        >
-          <div className="col-span-1">
-            <label className="block mb-2 text-white">Component Name</label>
-            <input
-              type="text"
-              value={component.name}
-              onChange={(e) =>
-                setComponent({ ...component, name: e.target.value })}
-              className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
-              placeholder="(Login, Animate button, sidebar)"
-              required
-            />
-          </div>
-
-          <div className="col-span-1 sm:row-span-3">
-            <label className="block mb-2 text-white">Component Code</label>
-            <textarea
-              value={component.code}
-              onChange={(e) =>
-                setComponent({ ...component, code: e.target.value })}
-              className="rounded p-2 w-full h-40 sm:h-60 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
-              placeholder="<Code>"
-              required
-            />
-          </div>
-
-          <div className="col-span-1">
-            <label className="block mb-2 text-white">Component Category</label>
-            <select
-              value={component.category_id || ""}
-              onChange={(e) =>
-                setComponent({ ...component, category_id: e.target.value })}
-              className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 text-white text-xs bg-black border border-cyan-500"
-              required
-            >
-              <option value="">Select a category</option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="col-span-1">
-            <label className="block mb-2 text-white">Component Tags</label>
-            <Select
-              isMulti
-              options={tags.map((tag) => ({ value: tag.id, label: tag.name }))}
-              value={tags.filter((tag) => selectedTags.includes(tag.id)).map(
-                (tag) => ({ value: tag.id, label: tag.name })
-              )}
-              onChange={(selected) => {
-                setSelectedTags(selected.map((option: any) => option.value));
-              }}
-              styles={customStyles}
-              placeholder="Select tags..."
-            />
-          </div>
-
-          <div className="col-span-1 sm:col-span-2">
-            <label className="block mb-2 text-white w-fit ">
-              Component Description
-            </label>
-            <textarea
-              value={component.description}
-              onChange={(e) =>
-                setComponent({ ...component, description: e.target.value })}
-              className="rounded p-2 w-full h-10 mb-4 outline-1 outline-cyan-500 placeholder-white text-white text-xs bg-black border border-cyan-500"
-              placeholder="(Describe your component)"
-              required
-            />
-          </div>
-
-          <div className="col-span-1 sm:col-span-2">
-            <div className="flex flex-col sm:flex-row justify-center gap-2">
-              <button
-                type="submit"
-                className="w-full sm:w-auto outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
-              >
-                {isEditing ? "Update" : "Save"}
-              </button>
-              <button
-                type="button"
-                className="w-full sm:w-auto outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
-                onClick={() => {
-                  setModalOpen(false);
-                  setComponent({
-                    id: "",
-                    user_id: "",
-                    category_id: "",
-                    name: "",
-                    description: "",
-                    code: "",
-                  });
-                  setIsEditing(false);
-                }}
-              >
-                Cancel
-              </button>
+        <div className="w-fit h-fit mx-auto  ">
+          <form
+            onSubmit={(e) => handleSubmit(e, isEditing ? component.user_id : "")}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            {/* Component Name */}
+            <div className="col-span-1">
+              <label className="block mb-1 text-white text-sm">Component Name</label>
+              <input
+                type="text"
+                value={component.name}
+                onChange={(e) =>
+                  setComponent({ ...component, name: e.target.value })}
+                className="rounded p-2 w-full h-10 mb-3 outline-1 outline-cyan-500 placeholder-white text-white text-sm bg-black border border-cyan-500"
+                placeholder="(Login, Animate button, sidebar)"
+                required
+              />
             </div>
-            {alert && (
-              <div
-                className={`mt-4 p-2 rounded text-center ${
-                  alert.error
-                    ? "bg-red-200 text-red-800"
-                    : "bg-green-200 text-green-800"
-                }`}
+
+            {/* Component Code */}
+            <div className="col-span-1 sm:col-span-2">
+              <label className="block mb-1 text-white text-sm">Component Code</label>
+              <textarea
+                value={component.code}
+                onChange={(e) =>
+                  setComponent({ ...component, code: e.target.value })}
+                className="rounded p-2 w-full h-40 sm:h-60 mb-3 outline-1 outline-cyan-500 placeholder-white text-white text-sm bg-black border border-cyan-500"
+                placeholder="<Code>"
+                required
+              />
+            </div>
+
+            {/* Component Category */}
+            <div className="col-span-1">
+              <label className="block mb-1 text-white text-sm">Component Category</label>
+              <select
+                value={component.category_id || ""}
+                onChange={(e) =>
+                  setComponent({ ...component, category_id: e.target.value })}
+                className="rounded p-2 w-full h-10 mb-3 outline-1 outline-cyan-500 text-white text-sm bg-black border border-cyan-500"
+                required
               >
-                {alert.msg}
+                <option value="">Select a category</option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Component Tags */}
+            <div className="col-span-1">
+              <label className="block mb-1 text-white text-sm">Component Tags</label>
+              <Select
+                isMulti
+                options={tags.map((tag) => ({ value: tag.id, label: tag.name }))}
+                value={tags.filter((tag) => selectedTags.includes(tag.id)).map(
+                  (tag) => ({ value: tag.id, label: tag.name })
+                )}
+                onChange={(selected) => {
+                  setSelectedTags(selected.map((option: any) => option.value));
+                }}
+                styles={customStyles}
+                placeholder="Select tags..."
+              />
+            </div>
+
+            {/* Component Description */}
+            <div className="col-span-1 sm:col-span-2">
+              <label className="block mb-1 text-white text-sm">Component Description</label>
+              <textarea
+                value={component.description}
+                onChange={(e) =>
+                  setComponent({ ...component, description: e.target.value })}
+                className="rounded p-2 w-full h-20 sm:h-24 mb-3 outline-1 outline-cyan-500 placeholder-white text-white text-sm bg-black border border-cyan-500"
+                placeholder="(Describe your component)"
+                required
+              />
+            </div>
+
+            {/* Buttons */}
+            <div className="col-span-1 sm:col-span-2">
+              <div className="flex flex-col sm:flex-row justify-center gap-3">
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors"
+                >
+                  {isEditing ? "Update" : "Save"}
+                </button>
+                <button
+                  type="button"
+                  className="w-full sm:w-auto outline outline-cyan-500 text-white px-4 py-2 rounded hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors"
+                  onClick={() => {
+                    setModalOpen(false);
+                    setComponent({
+                      id: "",
+                      user_id: "",
+                      category_id: "",
+                      name: "",
+                      description: "",
+                      code: "",
+                    });
+                    setIsEditing(false);
+                  }}
+                >
+                  Cancel
+                </button>
               </div>
-            )}
-          </div>
-        </form>
+              {alert && (
+                <div
+                  className={`mt-4 p-3 rounded text-center ${
+                    alert.error
+                      ? "bg-red-200 text-red-800"
+                      : "bg-green-200 text-green-800"
+                  }`}
+                >
+                  {alert.msg}
+                </div>
+              )}
+            </div>
+          </form>
+        </div>
       </Modal>
     </div>
   );

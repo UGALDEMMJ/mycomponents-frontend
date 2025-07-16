@@ -53,7 +53,7 @@ const Layouth = () => {
                         <Sidebar />
                     </div>
                 </aside>
-                <aside className="fixed inset-0 z-40 flex sm:hidden">
+                <aside className={`fixed inset-0 z-40 flex sm:hidden ${showSidebarMovil ? "block" : "hidden"}`}>
                     {/* Overlay */}
                     <div
                         className="fixed inset-0 bg-black bg-opacity-50"

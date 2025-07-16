@@ -14,6 +14,10 @@ export const SidebarAdmin = () => {
     }
   };
 
+  const closeSidebar = () => {
+    setOpenIndex(null); // Cierra el sidebar móvil
+  };
+
   return (
     <div className="p-3 text-white font-space-mono">
       <div className="">
@@ -45,37 +49,45 @@ export const SidebarAdmin = () => {
         >
           <Link
             to={"/admin"}
-            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white "
+            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white"
+            onClick={closeSidebar}
           >
             Admin Dashboard
           </Link>
           <Link
             to={"/admin/addpost"}
-            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white "
+            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white"
+            onClick={closeSidebar}
           >
             Manage Components
           </Link>
           <Link
             to={"/admin/addcategory"}
-            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white "
+            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white"
+            onClick={closeSidebar}
           >
             Manage Categories
           </Link>
           <Link
             to={"/admin/addtag"}
-            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white "
+            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white"
+            onClick={closeSidebar}
           >
             Manage Tags
           </Link>
           <Link
             to={"/dashboard"}
-            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white "
+            className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-cyan-400 transition-colors text-white"
+            onClick={closeSidebar}
           >
             Public Dashboard
           </Link>
           <button
             type="button"
-            onClick={logOut}
+            onClick={() => {
+              logOut();
+              closeSidebar();
+            }}
             className="flex items-center gap-3 p-2 w-full rounded-md hover:bg-gradient-to-br hover:from-black hover:to-red-400 transition-colors text-white"
           >
             LogOut
