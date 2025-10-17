@@ -1,4 +1,3 @@
-```markdown
 # mycomponents-frontend
 
 [![Language: TypeScript](https://img.shields.io/badge/language-TypeScript-blue)]()
@@ -237,20 +236,8 @@ GitHub: https://github.com/UGALDEMMJ
 
 If you'd like to add an email, LinkedIn, or portfolio link, include them in this section of the README.
 
-## Badges & Extras
-
-You can add the following shields to the top of this README after enabling the relevant services:
-
+## Badges 
 - CI (GitHub Actions): https://img.shields.io/github/workflow/status/UGALDEMMJ/mycomponents-frontend/CI
 - Deno / Node version: https://img.shields.io/badge/node-%3E%3D16-brightgreen
 - License: https://img.shields.io/badge/license-MIT-green (after adding LICENSE)
 - Version: https://img.shields.io/github/v/release/UGALDEMMJ/mycomponents-frontend
-
----
-
-If you'd like, I can:
-- Create a .env.example file based on the API needs,
-- Propose a deno.json / package.json scripts block (depending on the framework),
-- Add a LICENSE (MIT) and open a PR to add it to the repository.
-
-```
